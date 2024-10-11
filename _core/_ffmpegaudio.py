@@ -3,7 +3,7 @@ import subprocess
 
 
 
-def _keeptheaudio(input_file, output_file):
+def keeptheaudio(input_file, output_file):
     
 
     # ffmpeg -i input_video.mp4 -q:a 0 -map a output_audio.mp3
@@ -13,7 +13,7 @@ def _keeptheaudio(input_file, output_file):
     subprocess.run(["ffmpeg", "-i", input_file, "-q:a", "0", "-map", "a", output_file])
     
 
-def _change_format(input_file, ouput_file):
+def change_format(input_file, ouput_file):
 
     # ffmpeg -i input_file.mp4 output_file.mkv
 

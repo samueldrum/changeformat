@@ -10,7 +10,7 @@ from _core._ffmpegcfg import install_ffmpeg
 
 
 
-def __change_format(input_file, ouput_file):
+def change_format(input_file, ouput_file):
 
     # ffmpeg -i input_file.mp4 output_file.mkv
 
@@ -19,7 +19,10 @@ def __change_format(input_file, ouput_file):
     subprocess.run(["ffmpeg", "-i", input_file, ouput_file])
 
 
-def __change_format_with_high_quality(input_file, ouput_file):
+def change_format_WHQ(input_file, ouput_file):
+    """
+    WHQ = with high quality
+    """
 
     # ffmpeg -i input_video.mkv -c:v copy output_video.mp4
 
@@ -31,7 +34,7 @@ def __change_format_with_high_quality(input_file, ouput_file):
 
 
 
-def __removetheaudio(input_file, output_file):
+def removetheaudio(input_file, output_file):
 
     # ffmpeg -i input_video.mp4 -an output_video.mp4
 
@@ -40,7 +43,7 @@ def __removetheaudio(input_file, output_file):
     subprocess.run(["ffmpeg", "-i", input_file, "-an", output_file])
 
 
-def __generate_images_from_video(input_file, output_file, fps=1, exten_imgage="png"):
+def generate_images_from_video(input_file, output_file, fps=1, exten_imgage="png"):
 
     #ffmpeg -i input_video.mp4 -vf "fps=1" output_%04d.png
 

@@ -1,1 +1,2 @@
-from changeformat.audio._audio import changeformat, keeptheaudio
+
+from _core._ffmpegaudio import change_format, keeptheaudio
