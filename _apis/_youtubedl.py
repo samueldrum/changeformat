@@ -18,9 +18,22 @@ def __install_youtube_dl():
         # brew install youtube-dl
         subprocess. run(["brew", "install", "youtube-dl"])
 
-    elif system == LINUX: # Distro's based on Ubuntu
-        # sudo apt install youtube-dl
-        subprocess. run(["sudo", "apt", "install", "youtube-dl"])
+    elif system == LINUX: #
+        #sudo wget https://yt-dl.org/downloads/latest/youtube-dl -O /usr/local/bin/youtube-dl
+        #sudo chmod a+rx /usr/local/bin/youtube-dl
+        subprocess.run([
+            "sudo",
+            "wget",
+            "https://yt-dl.org/downloads/latest/youtube-dl",
+            "-O",
+            "/usr/local/bin/youtube-dl"
+        ])
+        subprocess.run([
+            "sudo",
+            "chmod",
+            "a+rx",
+            "/usr/local/bin/youtube-dl"
+        ])
 
     else:
         raise OSError("Incompatible System")
