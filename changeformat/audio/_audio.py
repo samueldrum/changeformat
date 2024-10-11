@@ -1,6 +1,6 @@
 
 
-from _core.ffmpegcf import _change_format, _keeptheaudio
+from _core._ffmpegaudio import _change_format, _keeptheaudio
 
 
 
