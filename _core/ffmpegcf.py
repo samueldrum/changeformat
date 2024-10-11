@@ -37,6 +37,15 @@ def _change_format(input_file, ouput_file):
     install_ffmpeg()
 
     subprocess.run(["ffmpeg", "-i", input_file, ouput_file])
+
+
+def _change_format_with_high_quality(input_file, ouput_file):
+
+    # ffmpeg -i input_video.mkv -c:v copy output_video.mp4
+
+    install_ffmpeg()
+
+    subprocess.run(["ffmpeg", "-i", input_file, "-c:v", "copy", ouput_file])
     
 
 
@@ -57,3 +66,5 @@ def _removetheaudio(input_file, output_file):
     install_ffmpeg()
 
     subprocess.run(["ffmpeg", "-i", input_file, "-an", output_file])
+
+

@@ -1,7 +1,1 @@
-
-
-from _apis.ffmpegvideo import _change_format
-
-
-def changeformat(input_file, output_file):
-    _change_format(input_file, output_file)
+from _video import changeformat, changeformat_WHK, removetheaudio
