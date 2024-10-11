@@ -1,9 +1,6 @@
 
 from OS import LINUX, MACOS, WINDOWS, detect_system, platform
 import subprocess
-from dataclasses import dataclass
-from typing import ReadOnly
-import platform
 from enum import Enum
 
 
@@ -43,7 +40,7 @@ class Video(Enum):
 
 # Not supported on windows
 if detect_system().lower() == WINDOWS:
-    raise OSError(f"{platform.platform()} is not compatible with youtubedl api, try WSL")
+    raise OSError(f"{platform()} is not compatible with youtubedl api, try WSL")
 
 
 
