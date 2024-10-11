@@ -2,6 +2,7 @@
 from OS import LINUX, MACOS, WINDOWS, detect_system, platform
 import subprocess
 from enum import Enum
+import shutil
 
 
 YOUTUBE_DL = "youtube-dl"
@@ -46,29 +47,35 @@ if detect_system().lower() == WINDOWS:
 
 def __install_youtube_dl():
     system = detect_system().lower()
+
+    if shutil.which(YOUTUBE_DL):
+        print(f"{YOUTUBE_DL} já está instalado.")
+        return
+    
     if system == WINDOWS:
         print("You might download youtubedl dependency in the official web site")
 
     elif system == MACOS:
-        # brew install youtube-dl
-        subprocess. run(["brew", "install", YOUTUBE_DL])
+        try:
+            # brew install youtube-dl
+            subprocess. run(["brew", "install", YOUTUBE_DL], check=True)
+            print(f"{YOUTUBE_DL} has successfully installed via brew")
+        except subprocess.CalledProcessError:
+            print("Error trying to install youtube-dl via brew.")
 
-    elif system == LINUX: #
-        #sudo wget https://yt-dl.org/downloads/latest/youtube-dl -O /usr/local/bin/youtube-dl
-        #sudo chmod a+rx /usr/local/bin/youtube-dl
-        subprocess.run([
-            "sudo",
-            "wget",
-            "https://yt-dl.org/downloads/latest/youtube-dl",
-            "-O",
-            "/usr/local/bin/youtube-dl"
-        ])
-        subprocess.run([
-            "sudo",
-            "chmod",
-            "a+rx",
-            "/usr/local/bin/youtube-dl"
-        ])
+    elif system == LINUX:
+        try:
+            # Download and install youtube-dl
+            subprocess.run([
+                "sudo", "wget", "https://yt-dl.org/downloads/latest/youtube-dl", 
+                "-O", "/usr/local/bin/youtube-dl"
+            ], check=True)
+            subprocess.run([
+                "sudo", "chmod", "a+rx", "/usr/local/bin/youtube-dl"
+            ], check=True)
+            print(f"{YOUTUBE_DL} successfully installed on Linux.")
+        except subprocess.CalledProcessError:
+            print("Error when trying to install youtube-dl on Linux.")
 
     else:
         raise OSError("Incompatible System")
