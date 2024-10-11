@@ -1,8 +1,8 @@
 
 """
-Change format library only suport 3 OS
+Change format library only support 3 OS
 
-windows - linux
+windows - linux - macos
 
 """
 
@@ -10,21 +10,45 @@ import platform
 import subprocess
 import warnings
 
+# THE OS SUPPORTED BY changeformat library
 WINDOWS = "windows"
+
+MACOS = "darwin"
 
 LINUX = "linux"
 
 
+
+
+def _check_ffmpeg_installed():
+    result = subprocess.run(["ffmpeg", "--version"], capture_output=True, text=True)
+    if result.returncode == 0:
+        return True
+    else:
+        return False
+
+
+
 def install_ffmpeg():
 
-    if platform.platform() == WINDOWS:
-        subprocess.run(["winget", "install", "ffmpeg"])
+    if _check_ffmpeg_installed() == True:
+        ...
+    else:
+        if platform.system().lower() == WINDOWS:
+            subprocess.run(["winget", "install", "ffmpeg"])
 
-    elif platform.platform() == LINUX: # It's just only for ubuntu based
-        subprocess.run(["sudo", "apt", "install", "ffmpeg"])
+        elif platform.system().lower() == MACOS:
+            subprocess.run(["brew", "install", "ffmpeg"])
+
+
+        elif platform.system().lower() == LINUX: # It's just only for ubuntu based
+            subprocess.run(["sudo", "apt", "install", "ffmpeg"])
+
+        else:
+            raise OSError(f"system: {platform.system()} not compatible")
 
     warnings.warn("I highly recommend you to restart the ide or code editor that you using now", UserWarning)
-    
+        
     
 
 
