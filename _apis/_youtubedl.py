@@ -1,6 +1,11 @@
 
-from OS import LINUX, MACOS, WINDOWS, detect_system
+from OS import LINUX, MACOS, WINDOWS, detect_system, platform
 import subprocess
+
+
+# Not supported on windows
+if detect_system().lower() == WINDOWS:
+    raise OSError(f"{platform()} is not compatible with youtubedl api, try WSL")
 
 
 
